@@ -1,8 +1,8 @@
 <#
 .SYNOPSIS
-    Copys a profile to another location.
+    Copys a PowerShell profile to another location.
 .DESCRIPTION
-    Copys the profile of a specific scope to another location.
+    Copys the PowerShell profile of a specific scope to another location.
 .INPUTS
     None.
 .OUTPUTS

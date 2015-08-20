@@ -1,8 +1,8 @@
 <#
 .SYNOPSIS
-    Creates a new profile.ps1.
+    Creates a new PowerShell profile.ps1.
 .DESCRIPTION
-    Creates a new profile in specified scope, and can add a script block to the profile.
+    Creates a new PowerShell profile in specified scope, and can add a script block to the profile.
 .INPUTS
     None.
 .OUTPUTS
@@ -16,7 +16,7 @@
 .EXAMPLE
     PS C:\> New-PSProfile -Scope CurrentUserAllHosts -ScriptBlock {Import-Module -Name ActiveDirectory}
 .NOTES
-    Administrator access is need to creat AllUser profile scopes.
+    Administrator access is need to create AllUser profile scopes.
 .LINK
     http://dotps1.github.io
 #>
@@ -45,7 +45,7 @@ Function New-PSProfile
 
     Process
     {
-        if ($PSCmdlet.ShouldProcess($profile.$Scope, 'Overwrite current profile'))
+        if ($PSCmdlet.ShouldProcess($profile.$Scope, 'Overwrite existing profile'))
         {
             $newItemParameters = @{
                 Path = $profile.$Scope
