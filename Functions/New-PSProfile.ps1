@@ -29,7 +29,7 @@ Function New-PSProfile
     Param
     (
         [Parameter()]
-        [ValidateSet('AllUsersAllHosts','AllUserCurrentHost','CurrentUserAllHosts','CurrentUserCurrentHost')]
+        [ValidateSet('AllUsersAllHosts','AllUsersCurrentHost','CurrentUserAllHosts','CurrentUserCurrentHost')]
         [String]
         $Scope = 'CurrentUserCurrentHost',
 
@@ -52,12 +52,19 @@ Function New-PSProfile
                 Force = $true
             }
 
-            if ($ScriptBlock -ne $null)
+            if ($ScriptBlock)
             {
                 $newItemParameters.Add('Value', $ScriptBlock)
             }
 
-            New-Item @newItemParameters
+            try
+            {
+                New-Item @newItemParameters
+            }
+            catch
+            {
+                Write-Error -Message $_.ToString()
+            }
         }
     }
 
