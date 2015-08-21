@@ -38,16 +38,25 @@ Function Remove-PSProfile
 
     Process
     {
-        if ($PSCmdlet.ShouldProcess($profile.$Scope, 'Remove profile'))
+        if (Test-Path -Path $profile.$Scope)
         {
-            try
+            if ($PSCmdlet.ShouldProcess($profile.$Scope, 'Remove profile'))
             {
-                Remove-Item -Path $profile.$Scope -Force -ErrorAction 'Stop'
+                try
+                {
+                    Remove-Item -Path $profile.$Scope -Force -ErrorAction 'Stop'
+                }
+                catch
+                {
+                    Write-Error -Message $_.ToString()
+                    break
+                }
             }
-            catch
-            {
-                Write-Error -Message $_.ToString()
-            }
+        }
+        else
+        {
+            Write-Error -Message "Cannot find path '$($profile.$Scope)' becasue it does not exist."
+            break
         }
     }
 

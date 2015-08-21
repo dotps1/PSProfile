@@ -50,11 +50,13 @@ Function Copy-PSProfile
             catch
             {
                 Write-Error -Message $_.ToString()
+                break
             }
         }
         else
         {
-            Write-Error -Message "Profile not found $($profile.$Scope)."
+            Write-Error -Message "Cannot find path '$($profile.$Scope)' because it does not exist."
+            break
         }
     }
 

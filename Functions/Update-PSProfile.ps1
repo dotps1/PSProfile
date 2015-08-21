@@ -51,13 +51,14 @@ Function Update-PSProfile
         }
         else
         {
-        try
+            try
             {
                 Add-Content -Path $profile.$Scope -Value "`r`n$ScriptBlock"
             }
             catch
             {
                 Write-Error -Message $_.ToString()
+                break
             }
         }
     }

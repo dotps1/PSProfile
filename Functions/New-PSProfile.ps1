@@ -71,6 +71,7 @@ Function New-PSProfile
         catch
         {
             Write-Error -Message $_.ToString()
+            break
         }
     }
 
