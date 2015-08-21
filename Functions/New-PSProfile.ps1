@@ -45,19 +45,33 @@ Function New-PSProfile
 
     Process
     {
-        if ($PSCmdlet.ShouldProcess($profile.$Scope, 'Overwrite existing profile'))
+        $newItemParameters = @{
+            Path = $profile.$Scope
+            Force = $true
+            ErrorAction = 'Stop'
+        }
+
+        if ($ScriptBlock)
         {
-            $newItemParameters = @{
-                Path = $profile.$Scope
-                Force = $true
-                ErrorAction = 'Stop'
-            }
+            $newItemParameters.Add('Value', $ScriptBlock)
+        }
 
-            if ($ScriptBlock)
+        if (Test-Path -Path $profile.$Scope)
+        {
+            if ($PSCmdlet.ShouldProcess($profile.$Scope, "Overwrite existing profile"))
             {
-                $newItemParameters.Add('Value', $ScriptBlock)
+                try
+                {
+                    New-Item @newItemParameters
+                }
+                catch
+                {
+                    Write-Error -Message $_.ToString()
+                }
             }
-
+        }
+        else
+        {
             try
             {
                 New-Item @newItemParameters
