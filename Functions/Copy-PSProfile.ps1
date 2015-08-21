@@ -16,7 +16,7 @@
 .EXAMPLE
     PS C:\> Copy-PSProfile -Scope AllUsersAllHosts -Destination "$env:USERPROFILE\Desktop"
 .LINK
-    http://dotps1.github.io
+    http://dotps1.github.io/PSProfile
 #>
 Function Copy-PSProfile
 {
@@ -45,7 +45,7 @@ Function Copy-PSProfile
         {
             try
             {
-                Copy-Item -Path $profile.$Scope -Destination $Destination -PassThru
+                Copy-Item -Path $profile.$Scope -Destination $Destination -PassThru -ErrorAction 'Stop'
             }
             catch
             {

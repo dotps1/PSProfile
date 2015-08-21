@@ -16,7 +16,7 @@
 .NOTES
     Administrative access is need to remove AllUser profiles.
 .LINK
-    http://dotps1.github.io
+    http://dotps1.github.io/PSProfile
 #>
 Function Remove-PSProfile
 {
@@ -42,7 +42,7 @@ Function Remove-PSProfile
         {
             try
             {
-                Remove-Item -Path $profile.$Scope -Force
+                Remove-Item -Path $profile.$Scope -Force -ErrorAction 'Stop'
             }
             catch
             {

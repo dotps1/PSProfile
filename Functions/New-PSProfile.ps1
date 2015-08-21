@@ -18,7 +18,7 @@
 .NOTES
     Administrator access is need to create AllUser profile scopes.
 .LINK
-    http://dotps1.github.io
+    http://dotps1.github.io/PSProfile
 #>
 Function New-PSProfile
 {
@@ -50,6 +50,7 @@ Function New-PSProfile
             $newItemParameters = @{
                 Path = $profile.$Scope
                 Force = $true
+                ErrorAction = 'Stop'
             }
 
             if ($ScriptBlock)
