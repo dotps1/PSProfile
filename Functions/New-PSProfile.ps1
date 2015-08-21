@@ -58,28 +58,19 @@ Function New-PSProfile
 
         if (Test-Path -Path $profile.$Scope)
         {
-            if ($PSCmdlet.ShouldProcess($profile.$Scope, "Overwrite existing profile"))
+            if (-not ($PSCmdlet.ShouldProcess($profile.$Scope, "Overwrite existing profile")))
             {
-                try
-                {
-                    New-Item @newItemParameters
-                }
-                catch
-                {
-                    Write-Error -Message $_.ToString()
-                }
+                break
             }
         }
-        else
+        
+        try
         {
-            try
-            {
-                New-Item @newItemParameters
-            }
-            catch
-            {
-                Write-Error -Message $_.ToString()
-            }
+            New-Item @newItemParameters
+        }
+        catch
+        {
+            Write-Error -Message $_.ToString()
         }
     }
 
